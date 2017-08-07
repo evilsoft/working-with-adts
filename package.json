@@ -1,0 +1,24 @@
+{
+  "name": "working-with-adts",
+  "version": "0.1.0",
+  "description": "A project to capture the code used in a YouTube Livestream Project",
+  "main": "index.js",
+  "scripts": {
+    "start": "nodemon index.js -q -x 'clear && node'"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/evilsoft/working-with-adts.git"
+  },
+  "author": "Ian Hofmann-Hicks (evil)",
+  "bugs": {
+    "url": "https://github.com/evilsoft/working-with-adts/issues"
+  },
+  "homepage": "https://github.com/evilsoft/working-with-adts#readme",
+  "dependencies": {
+    "crocks": "^0.7.0",
+    "eslint": "^4.4.0",
+    "eyes": "^0.1.8",
+    "nodemon": "^1.8.1"
+  }
+}
