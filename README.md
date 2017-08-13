@@ -25,6 +25,7 @@ Below is a table that matches the sessions to their respective branches:
 |Session|Branch|Command|
 |-|-|-|
 |[Functional JS - Working with ADTs - 01](http://bit.ly/adts-01)|[adts-01](https://github.com/evilsoft/working-with-adts/tree/adts-01)|`git checkout adts-01`|
+|[Functional JS - Working with ADTs - 02](http://bit.ly/adts-02)|[adts-02](https://github.com/evilsoft/working-with-adts/tree/adts-02)|`git checkout adts-02`|
 
 #### Run the code
 
@@ -34,4 +35,4 @@ To get started running some code, just run the following in the project root:
 $ npm start
 ```
 
-Now just edit the `index.js` file in the roots, and your code will be executed on each save. 
+Now just edit the `index.js` file in the roots, and your code will be executed on each save.
