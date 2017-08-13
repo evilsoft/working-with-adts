@@ -1,10 +1,14 @@
-## Working With Algebraic Data Types in Javascript - 01
+## Working With Algebraic Data Types in Javascript - 02
 
-In this session we start by putting together a deck of standard playing cards by finding the product of (2) lists of card attributes. We get the product by taking advantage of a `List` being an `Applicative` functor. Once we have our deck of cards, we now need a way to shuffle this deck.
+This session mainly focuses on the details of a Linear Congruential Generator. This should a help us understand the strengths and weaknesses of using a number sequence of this nature. We explore the various aspects of the equation and talk some about how bitwise operations work in Javascript.
 
-We explore using a `Pair` of `Array`s with each side representing a pile. The pile on the Right is the starting pile. While the pile on the Left is our result. By taking advantage of how a `Pair` can be `Chain`ed, iff the Lefts are `Semigroup`s of the same type, we can create a function that just plucks (1) card from the Right and wraps it in an `Array` on the `Left`. `chain`ing then merges the (2) `Pair`s together. By `chain`ing this function over and over, we can move the entire deck over one card at a time.
+Once we have the generator built, we shift from using a generator function to a `State` monad. First we manually set up a `State` by wrapping a function that returns a `Pair`, to show us what is happening behind the scenes, mechanically. Then we look at two functions used for getting and setting the state in the `State` monad, `get` and `modify`.
 
-We talk a little about how `Pair` is a `Bifunctor` and allows us to `map` over each side of the `Pair`. Finally we commit a horrible sin, and use the Javascript `Math.random` to randomly choose a card to be moved on each iteration, giving us a way to "shuffle" elements in a given `Array`.
+We use `get` by passing a function to it, which results in a `State` that leaves the state portion untouched and sets the result portion to the result of running the state through our provided function.
+
+We then use `modify` to set the state to the result of the function we pass it. `modify` will set the value to `Unit`, so we need to set our value to be the value we calculated from our new seed. We do that by using `map` and provide it a constant (pointed) function that returns our value. When our `State` is returned, it will contain our calculated value and the modified state.
+
+We then show how using `chain` on our new functions will get us the next number in the sequence and update the state to reflect the new seed to be used when calculating a future number in the sequence.
 
 The ADT library we are using this series is called `crocks` and can be [found here](https://github.com/evilsoft/crocks).
 
@@ -13,7 +17,7 @@ The ADT library we are using this series is called `crocks` and can be [found he
 Clone this repo onto your local system, navigate to the folder and run:
 
 ```
-$ git checkout adts-01
+$ git checkout adts-02
 ```
 This will check out this specific branch, which is the result of the session is associated to.
 
