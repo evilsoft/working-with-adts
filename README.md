@@ -1,14 +1,12 @@
-## Working With Algebraic Data Types in Javascript - 02
+## Working With Algebraic Data Types in Javascript - 03
 
-This session mainly focuses on the details of a Linear Congruential Generator. This should a help us understand the strengths and weaknesses of using a number sequence of this nature. We explore the various aspects of the equation and talk some about how bitwise operations work in Javascript.
+This time we take a deep dive into another ADT, named `Arrow`. We see that `Arrow` allows us to work with functions in a slightly different way then just normal function composition. While mechanically it is the same as normal function composition, it provides a different way of viewing how composition is carried out.
 
-Once we have the generator built, we shift from using a generator function to a `State` monad. First we manually set up a `State` by wrapping a function that returns a `Pair`, to show us what is happening behind the scenes, mechanically. Then we look at two functions used for getting and setting the state in the `State` monad, `get` and `modify`.
+Using a Pizza Oven analogy, we look at how we can adapt on either side of the `Arrow`, providing another means for extending our functions. We also take a look at how we can use `Arrow` to run parallel computations, just by using functions are `Pair` endomorphisims.
 
-We use `get` by passing a function to it, which results in a `State` that leaves the state portion untouched and sets the result portion to the result of running the state through our provided function.
+We then use all the bits we went over to try a refactor on our random number generating code. When it is all said and done, we find `Arrow` may not buy us what we need and adds a bunch of complexity to boot.
 
-We then use `modify` to set the state to the result of the function we pass it. `modify` will set the value to `Unit`, so we need to set our value to be the value we calculated from our new seed. We do that by using `map` and provide it a constant (pointed) function that returns our value. When our `State` is returned, it will contain our calculated value and the modified state.
-
-We then show how using `chain` on our new functions will get us the next number in the sequence and update the state to reflect the new seed to be used when calculating a future number in the sequence.
+Finally we conclude on hinting at a possible solution to our refactor by just changing our perception of the `State` monad. We want to look not as simply an ADT that lets us share mutable state between functions, but more as just a simple Deterministic Finite State Machine (DFSM) and give a teaser for next session.
 
 The ADT library we are using this series is called `crocks` and can be [found here](https://github.com/evilsoft/crocks).
 
@@ -17,7 +15,7 @@ The ADT library we are using this series is called `crocks` and can be [found he
 Clone this repo onto your local system, navigate to the folder and run:
 
 ```
-$ git checkout adts-02
+$ git checkout adts-03
 ```
 This will check out this specific branch, which is the result of the session is associated to.
 
