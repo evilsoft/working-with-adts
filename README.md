@@ -26,6 +26,7 @@ Below is a table that matches the sessions to their respective branches:
 |-|-|-|
 |[Functional JS - Working with ADTs - 01](http://bit.ly/adts-01)|[adts-01](https://github.com/evilsoft/working-with-adts/tree/adts-01)|`git checkout adts-01`|
 |[Functional JS - Working with ADTs - 02](http://bit.ly/adts-02)|[adts-02](https://github.com/evilsoft/working-with-adts/tree/adts-02)|`git checkout adts-02`|
+|[Functional JS - Working with ADTs - 03](http://bit.ly/adts-03)|[adts-03](https://github.com/evilsoft/working-with-adts/tree/adts-03)|`git checkout adts-03`|
 
 #### Run the code
 
