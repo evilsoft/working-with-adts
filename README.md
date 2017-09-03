@@ -1,12 +1,12 @@
-## Working With Algebraic Data Types in Javascript - 03
+## Working With Algebraic Data Types in Javascript - 04
 
-This time we take a deep dive into another ADT, named `Arrow`. We see that `Arrow` allows us to work with functions in a slightly different way then just normal function composition. While mechanically it is the same as normal function composition, it provides a different way of viewing how composition is carried out.
+After trying to clean some of the imperative bits up using the `Arrow` type, we found that there may be something we are missing with our implementation. In this session, we try to change our intuition around the `State` type. Instead of looking at it as a way to allow for mutable state between a family of functions, we instead look at it as a way to describe a simple Deterministic Finite State Machine.
 
-Using a Pizza Oven analogy, we look at how we can adapt on either side of the `Arrow`, providing another means for extending our functions. We also take a look at how we can use `Arrow` to run parallel computations, just by using functions are `Pair` endomorphisims.
+In order to change our perspective, we look at the various ways to construct it. We start off with the default constructor and encode our transitions using a function that returns a `Pair`. While this shows what is going on under the hood, it is not very friendly with our vanilla JS functions. We then look at (2) of the construction helpers `modify` and `get` to give us the ability to write our transitions in normal JS functions, and lift them into the `State` and let those functions handle the encoding for us.
 
-We then use all the bits we went over to try a refactor on our random number generating code. When it is all said and done, we find `Arrow` may not buy us what we need and adds a bunch of complexity to boot.
+Building out a simple vending machine, we look at how to use `chain` to apply and compose the various transitions for both normal state transitions and state evaluation. We look at how we can combine simple transitions to create more complex transitions without changing how we interact with the type. Finally we look at how to combine both state transition and evaluation into the flow.
 
-Finally we conclude on hinting at a possible solution to our refactor by just changing our perception of the `State` monad. We want to look not as simply an ADT that lets us share mutable state between functions, but more as just a simple Deterministic Finite State Machine (DFSM) and give a teaser for next session.
+With the new way of looking at `State`, we take a crack at getting rid of those imperative bits in our RNG. We separate out all the separate concerns into their own JS functions.
 
 The ADT library we are using this series is called `crocks` and can be [found here](https://github.com/evilsoft/crocks).
 
@@ -15,7 +15,7 @@ The ADT library we are using this series is called `crocks` and can be [found he
 Clone this repo onto your local system, navigate to the folder and run:
 
 ```
-$ git checkout adts-03
+$ git checkout adts-04
 ```
 This will check out this specific branch, which is the result of the session is associated to.
 

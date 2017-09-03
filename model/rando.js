@@ -1,27 +1,45 @@
 const { get, modify } = require('crocks/State')
 
-const B = require('crocks/combinators/composeB')
-const K = require('crocks/combinators/constant')
 const assign = require('crocks/helpers/assign')
+const B = require('crocks/combinators/composeB')
 const option = require('crocks/pointfree/option')
 const prop = require('crocks/Maybe/prop')
 
-// rando : Integer -> State Object Float
-const rando = x => {
-  const seed = (1103515244 * x + 12345) & 0x7fffffff
-  const value = (seed >>> 15) / 0x7fff
+// newSeed : Int -> Int
+const newSeed =
+  seed => (1103515244 * seed + 12345) & 0x7fffffff
 
-  return modify(assign({ seed }))
-    .map(K(value))
-}
+// calcValue : Int -> Float
+const calcValue =
+  seed => (seed >>> 16) / 0x7fff
 
-// pluckSeed : Integer -> Object -> Integer
+// pluckSeed : Int -> GameState -> Int
 const pluckSeed =
   def => B(option(def), prop('seed'))
 
-// pullRandom : Integer -> State Object Float
-const pullRandom = defSeed =>
-  get(pluckSeed(defSeed)).chain(rando)
+// getSeed : () -> State GameState Int
+const getSeed =
+  () => get(pluckSeed({ seed: 0 }))
+
+// putSeed : Int -> State GameState ()
+const putSeed =
+  seed => modify(assign({ seed }))
+
+// genSeed : () -> State GameState ()
+const genSeed = () =>
+  getSeed()
+    .map(newSeed)
+    .chain(putSeed)
+
+// evaluate : () -> State GameState Float
+const evaluate = () =>
+  getSeed()
+    .map(calcValue)
+
+// pullRandom : () -> State GameState Float
+const pullRandom = () =>
+  genSeed()
+    .chain(evaluate)
 
 module.exports = {
   pullRandom

@@ -1,10 +1,16 @@
 const log = require('./lib/log')
+const { pullRandom } = require('./model/rando')
 
-const { pullRandom } = require('./model/randoArrow')
+// initialState : GameState
+const initialState = {
+  deck: [],
+  seed: Date.now()
+}
 
 log(
   pullRandom()
     .chain(pullRandom)
     .chain(pullRandom)
-    .execWith({ seed: 23 })
+    .chain(pullRandom)
+    .evalWith(initialState)
 )
