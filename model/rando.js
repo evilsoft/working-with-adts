@@ -1,9 +1,4 @@
-const { get, modify } = require('crocks/State')
-
-const assign = require('crocks/helpers/assign')
-const B = require('crocks/combinators/composeB')
-const option = require('crocks/pointfree/option')
-const prop = require('crocks/Maybe/prop')
+const { getKey, putKey } = require('./helpers')
 
 // newSeed : Int -> Int
 const newSeed =
@@ -13,17 +8,13 @@ const newSeed =
 const calcValue =
   seed => (seed >>> 16) / 0x7fff
 
-// pluckSeed : Int -> GameState -> Int
-const pluckSeed =
-  def => B(option(def), prop('seed'))
-
 // getSeed : () -> State GameState Int
 const getSeed =
-  () => get(pluckSeed({ seed: 0 }))
+  getKey('seed', { seed: 0 })
 
 // putSeed : Int -> State GameState ()
 const putSeed =
-  seed => modify(assign({ seed }))
+  putKey('seed')
 
 // genSeed : () -> State GameState ()
 const genSeed = () =>

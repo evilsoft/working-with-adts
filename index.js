@@ -1,16 +1,31 @@
 const log = require('./lib/log')
-const { pullRandom } = require('./model/rando')
 
-// initialState : GameState
+const bimap = require('crocks/pointfree/bimap')
+
+const {
+  pickRandom,
+  deck,
+  displayCard
+} = require('./model/deck')
+
 const initialState = {
-  deck: [],
-  seed: Date.now()
+  seed: 23,
+  deck
 }
 
+const look = bimap(
+  x => displayCard(x.option('')),
+  xs => xs.length
+)
+
+const game =
+  pickRandom()
+    .chain(pickRandom)
+    .chain(pickRandom)
+    .chain(pickRandom)
+    .chain(pickRandom)
+    .execWith(initialState)
+
 log(
-  pullRandom()
-    .chain(pullRandom)
-    .chain(pullRandom)
-    .chain(pullRandom)
-    .evalWith(initialState)
+  look(game.deck)
 )

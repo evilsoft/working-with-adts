@@ -1,12 +1,9 @@
-## Working With Algebraic Data Types in Javascript - 04
+## Working With Algebraic Data Types in Javascript - 05
+Now that we have our Random Number Generator hooked up to our `GameState`, it is time to address the `Deck` model we originally put together. We start by changing how we select cards from the Deck because the index we want to select from will be provided for us. We also change the `Deck` interaction to pull one random card at a time instead of shuffling the entire `Deck` all at once. We build out a new "type" to represent our `Deck` and in doing so get the opportunity to look at a new `Monoid` called `Last`. We explore some of the features of `Last` to get a feel for how we can use it in our new flow.
 
-After trying to clean some of the imperative bits up using the `Arrow` type, we found that there may be something we are missing with our implementation. In this session, we try to change our intuition around the `State` type. Instead of looking at it as a way to allow for mutable state between a family of functions, we instead look at it as a way to describe a simple Deterministic Finite State Machine.
+With our new `Deck` ready to go, we now need to hook up to our `GameState` and figure out how we are going to get our Random Numbers into our `Deck` flow. Before we get into that, we do a quick refactor to pull out all of the boilerplate construction of integrating with the `GameState`. Once we make sure that all of our `Rando` functions still work as expected, we then utilize our new helpers to build out the accessor functions for our `Deck` model
 
-In order to change our perspective, we look at the various ways to construct it. We start off with the default constructor and encode our transitions using a function that returns a `Pair`. While this shows what is going on under the hood, it is not very friendly with our vanilla JS functions. We then look at (2) of the construction helpers `modify` and `get` to give us the ability to write our transitions in normal JS functions, and lift them into the `State` and let those functions handle the encoding for us.
-
-Building out a simple vending machine, we look at how to use `chain` to apply and compose the various transitions for both normal state transitions and state evaluation. We look at how we can combine simple transitions to create more complex transitions without changing how we interact with the type. Finally we look at how to combine both state transition and evaluation into the flow.
-
-With the new way of looking at `State`, we take a crack at getting rid of those imperative bits in our RNG. We separate out all the separate concerns into their own JS functions.
+Using those new `GameState` accessors, it is now just a matter of getting the all of our functions set up to work in the `GameState` world. With just a couple new functions, we find it is pretty easy to hook up and pull random cards from our `Deck`. Success!
 
 The ADT library we are using this series is called `crocks` and can be [found here](https://github.com/evilsoft/crocks).
 
@@ -15,7 +12,7 @@ The ADT library we are using this series is called `crocks` and can be [found he
 Clone this repo onto your local system, navigate to the folder and run:
 
 ```
-$ git checkout adts-04
+$ git checkout adts-05
 ```
 This will check out this specific branch, which is the result of the session is associated to.
 
